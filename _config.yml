@@ -1,0 +1,16 @@
+name: 酱油蔡的酱油坛
+description: 酱油蔡的技术博客
+meta_description: "酱油蔡的技术博客"
+
+markdown: kramdown
+highlighter: pygments
+logo: false
+paginate: 15
+baseurl: /
+domain_name: 'https://xingwangc.github.io'
+#google_analytics: 'UA-XXXXXXXX-X'
+gems: [jekyll-paginate]
+
+# Details for the RSS feed generator
+url:            'xingwangc.github.io'
+author:         'Simon Cai'
