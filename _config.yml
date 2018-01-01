@@ -3,7 +3,7 @@ description: 酱油蔡的技术博客
 meta_description: "酱油蔡的技术博客"
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 logo: false
 paginate: 15
 baseurl: /
