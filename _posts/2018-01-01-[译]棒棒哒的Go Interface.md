@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "棒棒哒的Go Interface"
+title:  "[译]棒棒哒的Go Interface"
 date:   2018-01-01
 categories: Go Golang Interface
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "更多Go Interface细节"
+title:  "[译]更多Go Interface细节"
 date:   2018-01-01
 categories: Go Golang Interface
 ---
