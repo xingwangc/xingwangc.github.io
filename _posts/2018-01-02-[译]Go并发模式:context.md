@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  [译]Go并发模式: Context
-date:   2018-01-02
+title: "[译]Go并发模式:context"
+date: 2018-01-02
 categories: Go 并发 Context
 ---
 
