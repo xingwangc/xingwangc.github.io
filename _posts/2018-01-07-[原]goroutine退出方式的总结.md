@@ -154,28 +154,28 @@ func cancelByPanic(c net.Conn, wg *sync.WaitGroup) {
 main函数也要做相应的更改，还需要起一个额外的goroutine来根据相应的退出机制关闭连接。示例中设置的是超时。超时后连接关闭，`io.WriteString()`将返回一个错误，然后退出goroutine.
 
 ```
-		go func(ctx context.Context, conn net.Conn, wg *sync.WaitGroup) {
-                        defer wg.Done()
-                        for {
-                                select {
-                                case <-ctx.Done():
-                                        fmt.Println("---close the connection outside!")
-                                        conn.Close()
-                                        return
-                                default:
-                                }
+	go func(ctx context.Context, conn net.Conn, wg *sync.WaitGroup) {
+		defer wg.Done()
+                for {
+                        select {
+                        case <-ctx.Done():
+                                fmt.Println("---close the connection outside!")
+                                conn.Close()
+                                return
+                        default:
                         }
-                }(ctx, conn, &wg)
+                }
+        }(ctx, conn, &wg)
 
-                wg.Add(1)
-                go cancelByPanic(conn, &wg)
+        wg.Add(1)
+        go cancelByPanic(conn, &wg)
 ```
 
 ## 等它自己退出:)
 
 最后，还有一种情况也可能是大家经常遇到的，就是本文开头提到的你的goroutine可能只是执行一个计算，但是这个计算执行的时间有点长。对于这种方式，貌似如果你不打算改你的设计换一种方式执行程序的话，就只有等它自己结束了。
 
-下面也是一个示例，这个示例只是根据一个初始值计算1到n的所有数的和。本例中使用简单的递归求和的方式，这是一个非常慢的计算过程。
+下面也是一个示例，这个示例只是根据一个初始值计算进行累减数求和。本例中使用简单的递归求和的方式，随着初始值的变大，计算过程会越来越慢。
 
 ```
 func slowCal(fac int) int {
@@ -205,7 +205,7 @@ main 函数中直接执行`go cancelByWait`即可。
 
 这个示例还有很大的改进空间，这里也不深入展开了。只简单的提两点，读者可以自己下去尝试下。当然这个例子也很简单，也不用花时间去写代码，想想应该就可以了:)。
 
-1. 这种递归调用方式可以被优化成更高的并发执行方式；
+1. 可以通过优化算法，以及修改并发方式提高计算速度。
 
 2. 这个示例也是可以引入context或channel来通知计算超时退出的，如果你不想要计算结果的话。
 
