@@ -84,13 +84,13 @@ categories: kubernetes
 
 			-A KUBE-SEP-PU5BJ5CJYE3SLHYK -s 172.16.8.4/32 -m comment --comment "default/svc-nginx:" -j MARK --set-xmark 0x4d415351/0xffffffff
 			
-		![nginx-iptables](assets/images/nginx-iptables)
+		![nginx-iptables](/assets/images/nginx-iptables)
 
 	2. 继续查询iptables，显示所有的iptables MASQUERADE规则，可以看到，有一条规则指示所有mark为0x4d415351的规则都将执行MASQUERADE。
 
 			-A POSTROUTING -m comment --comment "kubernetes service traffic requiring SNAT" -m mark --mark
 			
-		![nginx-masquerade](assets/images/nginx-masquerade)
+		![nginx-masquerade](/assets/images/nginx-masquerade)
 		
 	3. 所以经过上面的分析，增加一条规则对所有源地址为192.168.2.0/24，目的地是172.16.0.0/16的包进行MASQUERADE。
 
@@ -98,7 +98,7 @@ categories: kubernetes
 			
 	4. 增加后的规则如下，再进行访问就可以了
 
-		![nginx-masquerade2](assets/images/nginx-masquerade)
+		![nginx-masquerade2](/assets/images/nginx-masquerade)
 		
 > 遇到这个问题时，kubeproxy的默认模式还是不是iptables proxy模式，iptables proxy模式当时还是一个相当于完成开发的新功能，所以这个问题可能是当时iptables proxy模式在创建iptables规则时的bug造成的。
 		
