@@ -9,7 +9,7 @@ paginate: 15
 baseurl: /
 domain_name: 'https://xingwangc.github.io'
 #google_analytics: 'UA-XXXXXXXX-X'
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 # Details for the RSS feed generator
 url:            'xingwangc.github.io'
